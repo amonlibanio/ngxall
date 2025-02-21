@@ -67,7 +67,6 @@ RUN mkdir -p /var/www/html \
         --add-module=/tmp/ngx_http_substitutions_filter_module \
         --add-module=/tmp/ngx_http_geoip2_module \
         --add-module=/tmp/nginx-rtmp-module \
-        --add-module=/tmp/lua-nginx-module \
     " \
     && addgroup -S nginx \
     && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
@@ -86,14 +85,12 @@ RUN mkdir -p /var/www/html \
         gd-dev \
         geoip-dev \
         libmaxminddb-dev \
-        luajit-dev \
     && cd /tmp/ \
     # Clone required module repositories
     && git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git /tmp/ngx_http_substitutions_filter_module \
     && git clone https://github.com/leev/ngx_http_geoip2_module.git /tmp/ngx_http_geoip2_module \
     && git clone https://github.com/arut/nginx-rtmp-module.git /tmp/nginx-rtmp-module \
-    && git clone https://github.com/openresty/lua-nginx-module.git /tmp/lua-nginx-module \
-     && curl -sfSL https://github.com/openresty/headers-more-nginx-module/archive/v$MORE_SET_HEADER_VERSION.tar.gz -o $MORE_SET_HEADER_VERSION.tar.gz \
+    && curl -sfSL https://github.com/openresty/headers-more-nginx-module/archive/v$MORE_SET_HEADER_VERSION.tar.gz -o $MORE_SET_HEADER_VERSION.tar.gz \
     && tar xvf $MORE_SET_HEADER_VERSION.tar.gz \
     && curl -sfSL https://github.com/aperezdc/ngx-fancyindex/releases/download/v$FANCYINDEX/ngx-fancyindex-$FANCYINDEX.tar.xz -o fancyindex.tar.xz \
     && tar xvf fancyindex.tar.xz \
@@ -102,8 +99,6 @@ RUN mkdir -p /var/www/html \
     && tar -zxC /usr/src -f nginx.tar.gz \
     && rm nginx.tar.gz \
     && cd /usr/src/nginx-$NGINX_VERSION \
-    && export LUAJIT_LIB=/usr/lib \
-    && export LUAJIT_INC=/usr/include/luajit-2.1 \
     && ./configure $CONFIG --with-debug \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && mv objs/nginx objs/nginx-debug \
@@ -145,7 +140,6 @@ RUN mkdir -p /var/www/html \
     libstdc++ \
     curl \
     libmaxminddb \
-    luajit \
     && apk del --no-cache .build-deps \
     && apk del --no-cache .gettext \
     && mv /tmp/envsubst /usr/local/bin/ \
