@@ -1,0 +1,1 @@
+28 14 * * 0,4 /usr/local/bin/geolite2.sh >> /var/log/geolite2.log 2>&1

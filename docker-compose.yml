@@ -1,0 +1,24 @@
+# ------------------------------------------------------------------
+# This docker-compose file configures an nginx container with defined
+# build context, container settings, port mapping, environment variables,
+# volume mappings, network configuration, and restart policy.
+# ------------------------------------------------------------------
+
+services:
+  nginx:
+    image: amonlibanio/nginx
+    container_name: ngxall
+    ports:
+      - "8080:80"
+    env_file:
+      - .env.example
+    volumes:
+      - ./conf:/etc/nginx
+      - ./html:/var/www/html
+    networks:
+      - network
+    restart: unless-stopped
+
+networks:
+  network:
+    driver: bridge
