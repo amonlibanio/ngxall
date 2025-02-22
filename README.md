@@ -1,6 +1,6 @@
 # NGXALL
 
-[![Build Status](https://github.com/amonlibanio/ngxall/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/amonlibanio/ngxall/actions/workflows/docker.yml)
+[![Build and Push](https://github.com/amonlibanio/ngxall/actions/workflows/docker.yml/badge.svg)](https://github.com/amonlibanio/ngxall/actions/workflows/docker.yml)
 [![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/amonlibanio/ngxall/)
 [![GitHub license](https://img.shields.io/github/license/amonlibanio/ngxall.svg)](https://github.com/amonlibanio/ngxall?tab=MIT-1-ov-file)
 [![GitHub release](https://img.shields.io/github/release/amonlibanio/ngxall.svg)](https://github.com/amonlibanio/ngxall/releases/)
