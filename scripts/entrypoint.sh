@@ -12,13 +12,13 @@
 # ------------------------------------------------------------------------------------------------
 
 # Dynamically substitute all environment variables in main configuration file
-if [ -f "/etc/nginx/nginx.conf.templates" ]; then
-  envsubst < /etc/nginx/nginx.conf.templates > /etc/nginx/nginx.conf
+if [ -f "/etc/nginx/nginx.conf.template" ]; then
+  envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 fi
 
 # Process temporary configuration files for conf.d by applying complete variable substitution
-for file in /etc/nginx/templates/*.templates; do
-  [ -f "$file" ] && envsubst < "$file" > "/etc/nginx/conf.d/$(basename "${file%.templates}.conf")"
+for file in /etc/nginx/templates/*.template; do
+  [ -f "$file" ] && envsubst < "$file" > "/etc/nginx/conf.d/$(basename "${file%.template}.conf")"
 done
 
 # Install the cron job for periodic GeoLite2 database updates
