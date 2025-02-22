@@ -18,7 +18,7 @@ fi
 
 # Process temporary configuration files for conf.d by applying complete variable substitution
 for file in /etc/nginx/templates/*.template; do
-  [ -f "$file" ] && envsubst < "$file" > "/etc/nginx/conf.d/$(basename "${file%.template}.conf")"
+  [ -f "$file" ] && envsubst < "$file" > "/etc/nginx/conf.d/$(basename "$file" .template)"
 done
 
 # Install the cron job for periodic GeoLite2 database updates
