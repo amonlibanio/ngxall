@@ -10,7 +10,7 @@
 #
 # Ensure that the necessary cron configuration file and permissions are correctly set.
 # ------------------------------------------------------------------------------------------------
-
+export S="$"
 # Dynamically substitute all environment variables in main configuration file
 if [ -f "/etc/nginx/nginx.conf.template" ]; then
   envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
