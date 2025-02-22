@@ -21,9 +21,13 @@ if [ -n "$MAXMIND_SHA256" ]; then
   echo "$MAXMIND_SHA256  /tmp/geo.tar.gz" | sha256sum -c -
 fi
 
-# Extract the .mmdb database file and move it to the /etc/nginx directory.
-tar -xzf /tmp/geo.tar.gz --wildcards '*.mmdb' --strip-components=1 -C /tmp/
-mv /tmp/${EDITION_ID}.mmdb /etc/nginx/${EDITION_ID}.mmdb
+# Extract the archive to /tmp without preserving the top-level directory.
+tar -xzf /tmp/geo.tar.gz --strip-components=1 -C /tmp/
+if [ ! -f "/tmp/${EDITION_ID}.mmdb" ]; then
+  echo "Error: /tmp/${EDITION_ID}.mmdb not found."
+  exit 1
+fi
+mv "/tmp/${EDITION_ID}.mmdb" /etc/nginx/${EDITION_ID}.mmdb
 
 # Remove the temporary archive file.
 rm /tmp/geo.tar.gz
